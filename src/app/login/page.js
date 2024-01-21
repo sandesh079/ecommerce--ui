@@ -3,7 +3,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
 // Define the validation schema
-const SignupSchema = Yup.object().shape({ 
+const SignInSchema = Yup.object().shape({ 
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
@@ -16,15 +16,14 @@ const page = () => {
       const res = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Set the content type to JSON
+          'Content-Type': 'application/json', 
         },
         body: JSON.stringify({
           email: values.email,
           password: values.password,
         }),
       });
-      // Handle the response here (e.g., check for success or failure)
-
+      
     } catch (error) {
       console.error('Error:', error);
     }
@@ -37,7 +36,7 @@ const page = () => {
             email: "",
             password: "",
           }}
-          validationSchema={SignupSchema}
+          validationSchema={SignInSchema}
           onSubmit={(values) => {
             handleLogin(values)
 
